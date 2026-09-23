@@ -446,6 +446,42 @@ document.addEventListener("DOMContentLoaded", () => {
   updateSummary();
 });
 
+/* ---------- Live open/closed status ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const pill = document.getElementById("open-pill");
+  const label = document.getElementById("open-label");
+  const hero = document.getElementById("hero-status");
+  if (!pill && !hero) return;
+
+  function isOpen() {
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday
+    const mins = now.getHours() * 60 + now.getMinutes();
+    if (day === 0) return mins >= 720 && mins < 1320; // Sunday 12:00 - 22:00
+    return mins >= 540 && mins < 1320;                // Mon-Sat 9:00 - 22:00
+  }
+
+  function render() {
+    const open = isOpen();
+    if (pill && label) {
+      pill.classList.toggle("open", open);
+      pill.classList.toggle("closed", !open);
+      label.textContent = open ? "Open Now" : "Closed";
+      pill.title = open
+        ? "Open until 10:00 PM"
+        : "Opens 9:00 AM (noon on Sundays)";
+    }
+    if (hero) {
+      hero.textContent = open
+        ? "Open Now · Walk-ins Welcome"
+        : "Currently Closed · See Hours";
+    }
+  }
+
+  render();
+  setInterval(render, 30000);
+});
+
 /* ---------- FIFA tournament countdown ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const cd = document.getElementById("countdown");
