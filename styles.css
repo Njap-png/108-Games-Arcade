@@ -181,6 +181,37 @@ section h2 {
   margin-bottom: 40px;
 }
 
+.currency-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 35px;
+  color: var(--muted);
+}
+
+.cur-btn {
+  padding: 8px 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cur-btn:hover {
+  border-color: var(--play);
+}
+
+.cur-btn.active {
+  background: linear-gradient(135deg, var(--play), var(--play-dark));
+  border-color: var(--play);
+  color: #fff;
+}
+
 /* ---------- Games ---------- */
 .games {
   background: var(--bg-2);
@@ -267,9 +298,15 @@ section h2 {
   margin-bottom: 18px;
 }
 
-.price span {
+.price .per {
   font-size: 0.95rem;
   color: var(--muted);
+  font-family: "Inter", sans-serif;
+}
+
+.price .curr {
+  font-size: 1.1rem;
+  color: var(--play-glow);
   font-family: "Inter", sans-serif;
 }
 

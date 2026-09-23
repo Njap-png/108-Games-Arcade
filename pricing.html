@@ -23,10 +23,17 @@
   <section id="pricing" class="pricing page">
     <h2>Play in Kenyan Shillings (KES)</h2>
     <p class="subtitle">Pocket-friendly rates, no hidden charges</p>
+    <div class="currency-switch">
+      <span>Currency:</span>
+      <button class="cur-btn active" data-cur="KES">KES</button>
+      <button class="cur-btn" data-cur="USD">USD</button>
+      <button class="cur-btn" data-cur="EUR">EUR</button>
+      <button class="cur-btn" data-cur="GBP">GBP</button>
+    </div>
     <div class="cards">
       <div class="card">
         <h3>PS4 - Standard</h3>
-        <p class="price">KSh 100<span>/hour</span></p>
+        <p class="price"><span class="curr" data-cur-symbol="KSh">KSh</span> <span class="amount" data-kes="100">100</span><span class="per">/hour</span></p>
         <ul>
           <li>1 Player</li>
           <li>Choose from all our games</li>
@@ -34,7 +41,7 @@
       </div>
       <div class="card">
         <h3>FIFA</h3>
-        <p class="price">KSh 150<span>/hour</span></p>
+        <p class="price"><span class="curr" data-cur-symbol="KSh">KSh</span> <span class="amount" data-kes="150">150</span><span class="per">/hour</span></p>
         <ul>
           <li>FIFA 25 &amp; FIFA 26</li>
           <li>Perfect for head-to-head battles</li>
@@ -43,7 +50,7 @@
       </div>
       <div class="card">
         <h3>Couple / Party Deal</h3>
-        <p class="price">KSh 500<span>/3 hours</span></p>
+        <p class="price"><span class="curr" data-cur-symbol="KSh">KSh</span> <span class="amount" data-kes="500">500</span><span class="per">/3 hours</span></p>
         <ul>
           <li>Up to 4 players</li>
           <li>Perfect for birthdays &amp; groups</li>
