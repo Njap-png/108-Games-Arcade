@@ -139,9 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
       weekday: "long", day: "numeric", month: "long", year: "numeric"
     });
 
+    const msg = `108 Games Arcade booking: ${session}, ${dateStr} at ${selectedSlot}. Name: ${name}. Call me on ${phone}.`;
+    const smsUrl = `sms:+254725084222?&body=${encodeURIComponent(msg)}`;
+
     box.innerHTML = `<strong>Booking confirmed, ${name}!</strong><br>
       <small>${session} &middot; ${dateStr} at ${selectedSlot}<br>
-      We'll call you on ${phone} to confirm.</small>`;
+      Now send the booking as an SMS to 0725 084 222:</small><br>
+      <a class="btn sms-btn" href="${smsUrl}">Send Booking SMS</a>`;
     box.classList.add("show");
   });
 
