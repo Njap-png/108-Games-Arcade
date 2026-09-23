@@ -497,11 +497,11 @@ document.addEventListener("DOMContentLoaded", () => {
     /* Saturday = 6 */
     let diff = (6 - now.getDay() + 7) % 7;
     if (diff === 0) {
-      target.setHours(20, 0, 0, 0);
+      target.setHours(9, 30, 0, 0);
       if (target <= now) diff = 7;
     }
     target.setDate(now.getDate() + diff);
-    target.setHours(20, 0, 0, 0);
+    target.setHours(9, 30, 0, 0);
     return target;
   }
 
