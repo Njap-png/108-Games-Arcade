@@ -55,6 +55,13 @@ nav a:hover {
   color: #0070f3;
 }
 
+nav a.active {
+  color: #0070f3;
+  font-weight: bold;
+  border-bottom: 2px solid #0070f3;
+  padding-bottom: 4px;
+}
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -70,6 +77,35 @@ nav a:hover {
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 15px;
+}
+
+.hero .btn {
+  margin: 5px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #0070f3;
+}
+
+.btn-outline:hover {
+  background: #0070f3;
+}
+
+.home-blurb {
+  background: #111;
+  text-align: center;
+}
+
+.home-blurb p {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  color: #bbb;
+}
+
+.page {
+  padding-top: 120px;
+  min-height: 80vh;
 }
 
 .hero p {
@@ -196,8 +232,17 @@ section h2 {
   color: #bbb;
 }
 
-.contact {
-  text-align: center;
+.contact-box {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.contact-box .btn {
+  margin-bottom: 20px;
 }
 
 footer {
