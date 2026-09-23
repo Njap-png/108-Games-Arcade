@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     box.innerHTML = `<strong>Booking confirmed, ${name}!</strong><br>
       <small>${session} &middot; ${dateStr} at ${selectedSlot}<br>
-      Now send the booking as an SMS to 0725 084 222:</small><br>
+      Now send the booking as an SMS to +254 725 084 222:</small><br>
       <a class="btn sms-btn" href="${smsUrl}">Send Booking SMS</a>`;
     box.classList.add("show");
   });
