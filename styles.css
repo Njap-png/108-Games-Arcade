@@ -267,7 +267,7 @@ section h2 {
 }
 
 .game-card p {
-  padding: 14px;
+  padding: 0;
   font-weight: 700;
 }
 
@@ -574,6 +574,264 @@ footer {
   background: var(--bg-2);
   border-top: 1px solid var(--border);
   color: var(--muted);
+}
+
+/* ---------- Navigation upgrades ---------- */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.4rem;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  nav ul {
+    width: 100%;
+    flex-direction: column;
+    gap: 4px;
+    display: none;
+    padding-top: 10px;
+  }
+  nav ul.open {
+    display: flex;
+  }
+  nav a.active::after {
+    width: 0;
+  }
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Accessibility ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.cal-cell:focus-visible {
+  outline: 2px solid var(--play-glow);
+  outline-offset: 2px;
+}
+
+/* ---------- Stats strip ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 25px;
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.8rem;
+  color: var(--play-glow);
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Featured games ---------- */
+.featured {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.featured .game-list {
+  margin-bottom: 30px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* ---------- Game badges & tags ---------- */
+.game-card {
+  position: relative;
+}
+
+.game-card .badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, var(--play), var(--play-dark));
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+  box-shadow: 0 3px 12px rgba(0, 112, 243, 0.5);
+}
+
+.game-card.badge-gold .badge {
+  background: linear-gradient(135deg, #ffb800, #ff7a00);
+  box-shadow: 0 3px 12px rgba(255, 184, 0, 0.4);
+}
+
+.game-card .tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 2px 10px;
+  margin: 4px;
+}
+
+.games-meta {
+  padding: 8px 14px 14px;
+}
+
+.games-meta p {
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+/* ---------- Why us ---------- */
+.why-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.why-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 25px;
+  text-align: center;
+}
+
+.why-item .ico {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.why-item h4 {
+  margin-bottom: 6px;
+}
+
+.why-item p {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- Tournaments banner ---------- */
+.banner {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  background: linear-gradient(135deg, rgba(255, 184, 0, 0.15), rgba(255, 122, 0, 0.08));
+  border: 1px solid #ffb800;
+  border-radius: 14px;
+  padding: 22px 26px;
+  text-align: center;
+}
+
+.banner strong {
+  color: #ffd166;
+}
+
+.banner p {
+  color: var(--text);
+  margin: 0;
+}
+
+.rates-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Hours ---------- */
+.hours-list {
+  list-style: none;
+  color: var(--muted);
+}
+
+.hours-list li {
+  padding: 3px 0;
+}
+
+.hours-list li::before {
+  content: none;
+}
+
+/* ---------- Footer upgrades ---------- */
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--play-glow);
+}
+
+.footer-contact {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.footer-contact a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  color: var(--play-glow);
+}
+
+footer p {
+  margin: 0;
 }
 
 @media (max-width: 600px) {

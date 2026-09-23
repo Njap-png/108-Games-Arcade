@@ -36,6 +36,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".nav-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const menu = document.querySelector("nav ul");
+      const open = menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((el) => el.classList.add("visible"));
+    return;
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  els.forEach((el) => io.observe(el));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const cells = document.getElementById("cal-cells");
   if (!cells) return;
 
