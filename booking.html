@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Session | 108 Gaming Arcade</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">108<span>Gaming Arcade</span></div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="booking.html" class="active">Book</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="booking page">
+    <h2>Book a Session</h2>
+    <p class="subtitle">Pick a day, choose a time, secure your console.</p>
+
+    <div class="booking-wrap">
+      <div class="booking-col">
+        <div class="calendar-box">
+          <div class="cal-head">
+            <button class="cal-nav" id="prev" aria-label="Previous month">&lsaquo;</button>
+            <h3 id="cal-month"></h3>
+            <button class="cal-nav" id="next" aria-label="Next month">&rsaquo;</button>
+          </div>
+          <div class="cal-grid" id="cal-days">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="cal-grid" id="cal-cells"></div>
+        </div>
+      </div>
+
+      <div class="booking-col">
+        <label>Time Slot</label>
+        <div class="slots" id="slots"></div>
+
+        <label>Session Type</label>
+        <select id="session">
+          <option value="PS4 - Standard">PS4 - Standard (KSh 100/hr)</option>
+          <option value="FIFA">FIFA (KSh 150/hr)</option>
+          <option value="Couple / Party Deal">Couple / Party Deal (KSh 500/3hrs)</option>
+        </select>
+
+        <label>Name</label>
+        <input type="text" id="name" placeholder="Your name" required>
+
+        <label>Phone</label>
+        <input type="tel" id="phone" placeholder="07XX XXX XXX" required>
+
+        <button class="btn" id="book-btn">Confirm Booking</button>
+
+        <div class="confirmation" id="confirmation"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 108 Gaming Arcade. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
