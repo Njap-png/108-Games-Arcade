@@ -1,7 +1,7 @@
 const RATES = { KES: 1, USD: 130, EUR: 140, GBP: 165 };
 const SYMBOLS = { KES: "KSh", USD: "$", EUR: "\u20ac", GBP: "\u00a3" };
 const SESSION_COSTS = {
-  "PS4 - Standard": "KSh 100/hr",
+  "PlayStation - Standard": "KSh 100/hr",
   "FIFA": "KSh 150/hr",
   "Couple / Party Deal": "KSh 500 / 3 hrs"
 };
