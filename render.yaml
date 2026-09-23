@@ -4,6 +4,6 @@ services:
     runtime: node
     plan: free
     buildCommand: npm install
-    startCommand: serve -s . -l ${PORT:-10000}
+    startCommand: serve -l 10000
     healthCheckPath: /
     autoDeploy: true
