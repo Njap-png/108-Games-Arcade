@@ -1,8 +1,9 @@
 services:
   - type: web
     name: 108-games-arcade
-    runtime: static
-    buildCommand: ""
-    staticPublishPath: .
-    branch: main
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: serve -s . -l ${PORT:-10000}
+    healthCheckPath: /
     autoDeploy: true
