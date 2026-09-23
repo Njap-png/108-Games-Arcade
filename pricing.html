@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
+  <header id="site-header">
+    <div class="scroll-progress" id="scroll-progress"></div>
     <nav>
       <div class="logo">108<span>Games Arcade</span></div>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
@@ -23,6 +24,7 @@
   </header>
 
   <section class="pricing page reveal">
+    <span class="eyebrow">Rates</span>
     <h2>Simple Local Pricing</h2>
     <p class="subtitle">Pocket-friendly rates, no hidden charges</p>
 
@@ -47,7 +49,8 @@
           <li>Big-screen play</li>
         </ul>
       </div>
-      <div class="card">
+      <div class="card featured-plan">
+        <span class="plan-tag">POPULAR</span>
         <h3>FIFA</h3>
         <p class="price"><span class="curr" data-cur-symbol="KSh">KSh</span> <span class="amount" data-kes="150">150</span><span class="per">/hour</span></p>
         <ul>
@@ -67,9 +70,11 @@
       </div>
     </div>
     <p class="rates-note">All prices in Kenyan Shillings (KES). Foreign currency rates are approximate — the final price is always in KES.</p>
+    <p class="center" style="margin-top:34px"><a href="booking.html" class="btn">Book a Session</a></p>
   </section>
 
   <footer>
+    <div class="footer-brand">108 <span>Games Arcade</span></div>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="games.html">Games</a>

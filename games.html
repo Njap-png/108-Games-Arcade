@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070c">
   <title>Games | 108 Games Arcade</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
+  <header id="site-header">
+    <div class="scroll-progress" id="scroll-progress"></div>
     <nav>
       <div class="logo">108<span>Games Arcade</span></div>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
@@ -23,83 +25,104 @@
   </header>
 
   <section class="games page reveal">
+    <span class="eyebrow">Game Library</span>
     <h2>Our Games</h2>
-    <p class="subtitle">10 top titles available now on PlayStation 4</p>
-    <div class="game-list">
-      <div class="game-card badge-gold">
+    <p class="subtitle">10 top titles available now on PlayStation 4 — tap a cover for a closer look.</p>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All Games</button>
+      <button class="filter-btn" data-filter="sports">Sports</button>
+      <button class="filter-btn" data-filter="shooter">Shooter</button>
+      <button class="filter-btn" data-filter="fighting">Fighting</button>
+      <button class="filter-btn" data-filter="action">Action</button>
+      <button class="filter-btn" data-filter="open-world">Open World</button>
+    </div>
+
+    <div class="game-list" id="game-list">
+      <div class="game-card badge-gold" data-genre="sports" data-price="KSh 150/hr">
         <span class="badge">KSh 150/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/fifa25-cover.jpg" alt="FIFA 25" loading="lazy">
         <div class="games-meta">
           <p>FIFA 25</p>
           <span class="tag">Sports</span><span class="tag">Tournaments</span>
         </div>
       </div>
-      <div class="game-card badge-gold">
+      <div class="game-card badge-gold" data-genre="sports" data-price="KSh 150/hr">
         <span class="badge">KSh 150/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/fifa26-cover.jpg" alt="FIFA 26" loading="lazy">
         <div class="games-meta">
           <p>FIFA 26</p>
           <span class="tag">Sports</span><span class="tag">Tournaments</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="shooter" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/cod.jpg" alt="Call of Duty" loading="lazy">
         <div class="games-meta">
           <p>Call of Duty</p>
           <span class="tag">Shooter</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="fighting" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/mk.jpg" alt="Mortal Kombat" loading="lazy">
         <div class="games-meta">
           <p>Mortal Kombat</p>
           <span class="tag">Fighting</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="action" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/tombraider.jpg" alt="Tomb Raider" loading="lazy">
         <div class="games-meta">
           <p>Tomb Raider</p>
           <span class="tag">Action</span><span class="tag">Adventure</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="open-world" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/gta5.jpg" alt="GTA 5" loading="lazy">
         <div class="games-meta">
           <p>GTA 5</p>
           <span class="tag">Open World</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="sports" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/nba2k.jpg" alt="NBA 2K" loading="lazy">
         <div class="games-meta">
           <p>NBA 2K</p>
           <span class="tag">Sports</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="shooter" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/bfv.jpg" alt="Battlefield V" loading="lazy">
         <div class="games-meta">
           <p>Battlefield V</p>
           <span class="tag">Shooter</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="fighting" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/injustice.jpg" alt="Injustice" loading="lazy">
         <div class="games-meta">
           <p>Injustice</p>
           <span class="tag">Fighting</span>
         </div>
       </div>
-      <div class="game-card">
+      <div class="game-card" data-genre="action" data-price="KSh 100/hr">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/gow-cover.jpg" alt="God of War" loading="lazy">
         <div class="games-meta">
           <p>God of War</p>
@@ -109,7 +132,19 @@
     </div>
   </section>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Game preview">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+      <img id="lightbox-img" src="" alt="">
+      <div class="lightbox-caption">
+        <h3 id="lightbox-title"></h3>
+        <span class="badge" id="lightbox-price"></span>
+      </div>
+    </div>
+  </div>
+
   <footer>
+    <div class="footer-brand">108 <span>Games Arcade</span></div>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="games.html">Games</a>

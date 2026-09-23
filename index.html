@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070c">
+  <meta name="description" content="108 Games Arcade — your neighbourhood PlayStation 4 hangout. Big screens, top games, FIFA tournaments and easy booking.">
   <title>108 Games Arcade | Your Local PlayStation Arcade</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
+  <header id="site-header">
+    <div class="scroll-progress" id="scroll-progress"></div>
     <nav>
       <div class="logo">108<span>Games Arcade</span></div>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
@@ -23,56 +26,74 @@
   </header>
 
   <section class="hero">
-    <span class="tag">Your Neighbourhood Arcade</span>
-    <h1>Welcome to 108 Games Arcade</h1>
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+    <span class="tag">Now Open &middot; Walk-ins Welcome</span>
+    <h1>Welcome to <span class="hl">108 Games Arcade</span></h1>
     <p>The ultimate PlayStation 4 hangout — big screens, great games, and prices that keep it fun for everyone.</p>
-    <a href="booking.html" class="btn">Book Now</a>
-    <a href="games.html" class="btn btn-outline">Browse Games</a>
+    <div class="hero-actions">
+      <a href="booking.html" class="btn">Book Now</a>
+      <a href="games.html" class="btn btn-outline">Browse Games</a>
+    </div>
+    <div class="hero-chips">
+      <span><b>10+</b> Top PS4 Titles</span>
+      <span>From <b>KSh 100</b>/hr</span>
+      <span><b>FIFA</b> Tournaments</span>
+      <span>Open <b>7 Days</b></span>
+    </div>
+    <div class="scroll-hint">Scroll</div>
   </section>
 
   <section class="home-blurb reveal">
+    <span class="eyebrow">Why 108</span>
     <h2>Why Gamers Pick 108</h2>
     <div class="stats">
       <div class="stat">
-        <strong>10+</strong>
+        <strong data-count="10" data-suffix="+">10+</strong>
         <span>Top PS4 Games</span>
       </div>
       <div class="stat">
-        <strong>KSh 100</strong>
+        <strong data-count="100" data-prefix="KSh ">KSh 100</strong>
         <span>Standard Play / Hour</span>
       </div>
       <div class="stat">
-        <strong>7 Days</strong>
+        <strong data-count="7" data-suffix=" Days">7 Days</strong>
         <span>Open Weekly</span>
       </div>
       <div class="stat">
-        <strong>FIFA Tournaments</strong>
-        <span>Join &amp; Compete</span>
+        <strong data-count="50" data-suffix="+">50+</strong>
+        <span>FIFA Players Compete</span>
       </div>
     </div>
   </section>
 
   <section class="featured reveal">
+    <span class="eyebrow">Top Picks</span>
     <h2>Fan Favourites</h2>
     <p class="subtitle">A taste of what's waiting on your console</p>
     <div class="game-list">
       <div class="game-card badge-gold">
         <span class="badge">KSh 150/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/fifa25-cover.jpg" alt="FIFA 25" loading="lazy">
         <div class="games-meta"><p>FIFA 25</p></div>
       </div>
       <div class="game-card">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/cod.jpg" alt="Call of Duty" loading="lazy">
         <div class="games-meta"><p>Call of Duty</p></div>
       </div>
       <div class="game-card">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/bfv.jpg" alt="Battlefield V" loading="lazy">
         <div class="games-meta"><p>Battlefield V</p></div>
       </div>
       <div class="game-card">
         <span class="badge">KSh 100/hr</span>
+        <span class="play-overlay"></span>
         <img src="img/mk.jpg" alt="Mortal Kombat" loading="lazy">
         <div class="games-meta"><p>Mortal Kombat</p></div>
       </div>
@@ -81,6 +102,7 @@
   </section>
 
   <section class="why reveal">
+    <span class="eyebrow">The Experience</span>
     <h2>More Than a Game Room</h2>
     <div class="why-list">
       <div class="why-item">
@@ -107,18 +129,22 @@
   </section>
 
   <section class="testimonials reveal">
+    <span class="eyebrow">Testimonials</span>
     <h2>Players Love It Here</h2>
     <p class="subtitle">Real words from the gaming crew</p>
     <div class="quote-list">
       <div class="quote">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p>&ldquo;Best FIFA nights in the area. The tournaments are properly organised!&rdquo;</p>
         <span>- Otieno, regular</span>
       </div>
       <div class="quote">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p>&ldquo;Big screens, comfy seats, and prices that don't hurt. My weekend spot.&rdquo;</p>
         <span>- Achieng, gamer</span>
       </div>
       <div class="quote">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p>&ldquo;Booked a birthday party here — kids had an amazing time. Will be back.&rdquo;</p>
         <span>- Mama Brian, parent</span>
       </div>
@@ -126,12 +152,14 @@
   </section>
 
   <section class="contact-cta reveal">
+    <span class="eyebrow">Game On</span>
     <h2>Ready to Play?</h2>
     <p class="subtitle">Reserve your console in under a minute.</p>
     <p class="center"><a href="booking.html" class="btn">Book a Session</a></p>
   </section>
 
   <footer>
+    <div class="footer-brand">108 <span>Games Arcade</span></div>
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="games.html">Games</a>

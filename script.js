@@ -1,6 +1,7 @@
 const RATES = { KES: 1, USD: 130, EUR: 140, GBP: 165 };
 const SYMBOLS = { KES: "KSh", USD: "$", EUR: "\u20ac", GBP: "\u00a3" };
 
+/* ---------- Currency switcher ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".cur-btn");
   if (!buttons.length) return;
@@ -35,17 +36,57 @@ document.addEventListener("DOMContentLoaded", () => {
   apply("KES");
 });
 
+/* ---------- Mobile nav ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.querySelector(".nav-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const menu = document.querySelector("nav ul");
-      const open = menu.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(open));
+  const menu = document.querySelector("nav ul");
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.innerHTML = open ? "&times;" : "&#9776;";
+  });
+
+  menu.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.innerHTML = "&#9776;";
     });
-  }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!menu.classList.contains("open")) return;
+    if (!e.target.closest("nav")) {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.innerHTML = "&#9776;";
+    }
+  });
 });
 
+/* ---------- Header scroll state + progress bar ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.getElementById("site-header");
+  const progress = document.getElementById("scroll-progress");
+  if (!header && !progress) return;
+
+  function onScroll() {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    if (header) header.classList.toggle("scrolled", y > 24);
+    if (progress) {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      progress.style.width = max > 0 ? `${(y / max) * 100}%` : "0%";
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+});
+
+/* ---------- Reveal on scroll ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const els = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {
@@ -66,6 +107,140 @@ document.addEventListener("DOMContentLoaded", () => {
   els.forEach((el) => io.observe(el));
 });
 
+/* ---------- Animated stat counters ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll("[data-count]");
+  if (!counters.length || !("IntersectionObserver" in window)) return;
+
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+  function animate(el) {
+    const target = Number(el.dataset.count);
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    const duration = 1400;
+    const start = performance.now();
+
+    function step(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const val = Math.round(easeOut(t) * target);
+      el.textContent = `${prefix}${val}${suffix}`;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          animate(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  counters.forEach((c) => io.observe(c));
+});
+
+/* ---------- 3D tilt on game cards ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.matchMedia("(hover: none)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document.querySelectorAll(".game-card").forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-6px)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+});
+
+/* ---------- Game genre filters ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const bar = document.getElementById("filter-bar");
+  const list = document.getElementById("game-list");
+  if (!bar || !list) return;
+
+  const cards = Array.from(list.querySelectorAll(".game-card"));
+
+  bar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-btn");
+    if (!btn) return;
+
+    bar.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const filter = btn.dataset.filter;
+    cards.forEach((card, i) => {
+      const match = filter === "all" || card.dataset.genre === filter;
+      if (match) {
+        card.classList.remove("hidden-card");
+        card.style.animation = "none";
+        void card.offsetWidth;
+        card.style.animation = `fade-up 0.45s ${i * 0.04}s ease both`;
+      } else {
+        card.classList.add("hidden-card");
+      }
+    });
+  });
+});
+
+/* ---------- Lightbox ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const box = document.getElementById("lightbox");
+  if (!box) return;
+
+  const img = document.getElementById("lightbox-img");
+  const title = document.getElementById("lightbox-title");
+  const price = document.getElementById("lightbox-price");
+  const closeBtn = document.getElementById("lightbox-close");
+
+  function open(card) {
+    const src = card.querySelector("img");
+    const name = card.querySelector(".games-meta p");
+    img.src = src.getAttribute("src");
+    img.alt = src.alt;
+    title.textContent = name ? name.textContent : "";
+    price.textContent = card.dataset.price || "";
+    box.classList.add("open");
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
+
+  function close() {
+    box.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".game-card").forEach((card) => {
+    card.addEventListener("click", () => open(card));
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(card);
+      }
+    });
+  });
+
+  closeBtn.addEventListener("click", close);
+  box.addEventListener("click", (e) => {
+    if (e.target === box) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+});
+
+/* ---------- Booking calendar ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const cells = document.getElementById("cal-cells");
   if (!cells) return;
@@ -153,13 +328,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function warn(msg) {
     box.innerHTML = `<small>${msg}</small>`;
-    box.classList.add("show");
+    box.classList.add("show", "warn");
   }
 
   document.getElementById("book-btn").addEventListener("click", () => {
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const session = document.getElementById("session").value;
+
+    box.classList.remove("warn");
 
     if (!selectedDate) return warn("Please choose a day on the calendar.");
     if (!selectedSlot) return warn("Please pick a time slot.");
@@ -178,6 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Now send the booking as an SMS to +254 725 084 222:</small><br>
       <a class="btn sms-btn" href="${smsUrl}">Send Booking SMS</a>`;
     box.classList.add("show");
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 
   render();
