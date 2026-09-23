@@ -181,6 +181,15 @@ section h2 {
   margin-bottom: 40px;
 }
 
+.inline-link {
+  color: var(--play-glow);
+  text-decoration: none;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
 .currency-switch {
   display: flex;
   justify-content: center;
@@ -360,7 +369,22 @@ section h2 {
 }
 
 .contact-box .btn {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+}
+
+.contact-phone {
+  font-size: 1.6rem;
+  font-family: "Orbitron", sans-serif;
+  margin-bottom: 10px;
+}
+
+.contact-phone a {
+  color: var(--play-glow);
+  text-decoration: none;
+}
+
+.contact-phone a:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Booking ---------- */
