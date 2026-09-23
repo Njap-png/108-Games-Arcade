@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07070c">
-  <meta name="description" content="108 Games Arcade — your neighbourhood PlayStation 4 hangout. Big screens, top games, FIFA tournaments and easy booking.">
-  <title>108 Games Arcade | Your Local PlayStation Arcade</title>
+<meta name="theme-color" content="#07070c">
+  <meta name="description" content="108 Games Arcade — your neighbourhood PlayStation 4 hangout in Gachie, Kiambaa, Kiambu. Big screens, top games, FIFA tournaments and easy booking.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230070f3'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='26' font-weight='900' fill='%23fff' text-anchor='middle'%3E108%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -45,10 +47,35 @@
     <div class="scroll-hint">Scroll</div>
   </section>
 
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item"><i></i>FIFA 25</span>
+      <span class="marquee-item"><i></i>FIFA 26</span>
+      <span class="marquee-item"><i></i>Call of Duty</span>
+      <span class="marquee-item"><i></i>Mortal Kombat</span>
+      <span class="marquee-item"><i></i>GTA 5</span>
+      <span class="marquee-item"><i></i>NBA 2K</span>
+      <span class="marquee-item"><i></i>Battlefield V</span>
+      <span class="marquee-item"><i></i>Tomb Raider</span>
+      <span class="marquee-item"><i></i>God of War</span>
+      <span class="marquee-item"><i></i>Injustice</span>
+      <span class="marquee-item"><i></i>FIFA 25</span>
+      <span class="marquee-item"><i></i>FIFA 26</span>
+      <span class="marquee-item"><i></i>Call of Duty</span>
+      <span class="marquee-item"><i></i>Mortal Kombat</span>
+      <span class="marquee-item"><i></i>GTA 5</span>
+      <span class="marquee-item"><i></i>NBA 2K</span>
+      <span class="marquee-item"><i></i>Battlefield V</span>
+      <span class="marquee-item"><i></i>Tomb Raider</span>
+      <span class="marquee-item"><i></i>God of War</span>
+      <span class="marquee-item"><i></i>Injustice</span>
+    </div>
+  </div>
+
   <section class="home-blurb reveal">
     <span class="eyebrow">Why 108</span>
     <h2>Why Gamers Pick 108</h2>
-    <div class="stats">
+    <div class="stats stagger-in">
       <div class="stat">
         <strong data-count="10" data-suffix="+">10+</strong>
         <span>Top PS4 Games</span>
@@ -104,7 +131,7 @@
   <section class="why reveal">
     <span class="eyebrow">The Experience</span>
     <h2>More Than a Game Room</h2>
-    <div class="why-list">
+    <div class="why-list stagger-in">
       <div class="why-item">
         <span class="ico">🎮</span>
         <h4>Big Screens</h4>
@@ -128,11 +155,24 @@
     </div>
   </section>
 
+  <section class="tourney reveal">
+    <span class="eyebrow">FIFA Tournament</span>
+    <h2>Next Tournament Starts In</h2>
+    <p class="subtitle">Every Saturday, 8:00 PM — entry is open. Ask when you book.</p>
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div class="cd-box"><strong id="cd-d">--</strong><span>Days</span></div>
+      <div class="cd-box"><strong id="cd-h">--</strong><span>Hours</span></div>
+      <div class="cd-box"><strong id="cd-m">--</strong><span>Minutes</span></div>
+      <div class="cd-box"><strong id="cd-s">--</strong><span>Seconds</span></div>
+    </div>
+    <p class="center"><a href="booking.html" class="btn btn-gold">Reserve Your Spot</a></p>
+  </section>
+
   <section class="testimonials reveal">
     <span class="eyebrow">Testimonials</span>
     <h2>Players Love It Here</h2>
     <p class="subtitle">Real words from the gaming crew</p>
-    <div class="quote-list">
+    <div class="quote-list stagger-in">
       <div class="quote">
         <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p>&ldquo;Best FIFA nights in the area. The tournaments are properly organised!&rdquo;</p>
@@ -177,6 +217,8 @@
   </footer>
 
 <a class="wa-float" href="https://wa.me/254725084222" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.2 1.2-1.7 1.3-.4.1-1 .2-1.6-.1-.4-.2-1-.5-1.7-.9-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1 0-1.5.8-2.2 1.1-2.5.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6-.2.4-.3.5-.5.8l-.3.4c-.2.2-.4.4-.2.7.2.4.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.8 1.7.4.2.6.1.8-.1.2-.2.9-1 1.1-1.4.2-.3.4-.3.7-.2.3.1 1.8.9 2.1 1 .3.2.5.2.6.4.1.1.1.7-.1 1.3Z"/></svg></a>
+  <button class="back-top" id="back-top" aria-label="Back to top">&#8679;</button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,5 +1,20 @@
 const RATES = { KES: 1, USD: 130, EUR: 140, GBP: 165 };
 const SYMBOLS = { KES: "KSh", USD: "$", EUR: "\u20ac", GBP: "\u00a3" };
+const SESSION_COSTS = {
+  "PS4 - Standard": "KSh 100/hr",
+  "FIFA": "KSh 150/hr",
+  "Couple / Party Deal": "KSh 500 / 3 hrs"
+};
+
+/* ---------- Toast helper ---------- */
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove("show"), 2600);
+}
 
 /* ---------- Currency switcher ---------- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,9 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
+      const wasActive = btn.classList.contains("active");
       buttons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       apply(btn.dataset.cur);
+      if (!wasActive) showToast(`Currency switched to ${SYMBOLS[btn.dataset.cur]}`);
     });
   });
 
@@ -66,11 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ---------- Header scroll state + progress bar ---------- */
+/* ---------- Header scroll state + progress bar + back-to-top ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("site-header");
   const progress = document.getElementById("scroll-progress");
-  if (!header && !progress) return;
+  const backTop = document.getElementById("back-top");
 
   function onScroll() {
     const y = window.scrollY || document.documentElement.scrollTop;
@@ -80,11 +97,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const max = doc.scrollHeight - doc.clientHeight;
       progress.style.width = max > 0 ? `${(y / max) * 100}%` : "0%";
     }
+    if (backTop) backTop.classList.toggle("show", y > 480);
   }
 
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  if (backTop) {
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });
+
+/* ---------- Staggered child reveals ---------- */
+function activateStagger(el) {
+  el.querySelectorAll(".stagger-in").forEach((s) => s.classList.add("visible"));
+}
 
 /* ---------- Reveal on scroll ---------- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -98,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
           e.target.classList.add("visible");
+          activateStagger(e.target);
           io.unobserve(e.target);
         }
       });
@@ -178,9 +208,11 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.classList.add("active");
 
     const filter = btn.dataset.filter;
+    let shown = 0;
     cards.forEach((card, i) => {
       const match = filter === "all" || card.dataset.genre === filter;
       if (match) {
+        shown++;
         card.classList.remove("hidden-card");
         card.style.animation = "none";
         void card.offsetWidth;
@@ -189,6 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
         card.classList.add("hidden-card");
       }
     });
+
+    const count = document.getElementById("game-count");
+    if (count) count.innerHTML = `Showing <b>${shown}</b> of <b>${cards.length}</b> games`;
+    showToast(`Filtered: ${btn.textContent.trim()}`);
   });
 });
 
@@ -260,6 +296,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const monthLabel = document.getElementById("cal-month");
   const slotsBox = document.getElementById("slots");
+  const sessionSel = document.getElementById("session");
+
+  function updateSummary() {
+    const dayEl = document.getElementById("sum-day");
+    const timeEl = document.getElementById("sum-time");
+    const sessEl = document.getElementById("sum-session");
+    const priceEl = document.getElementById("sum-price");
+    if (!sessEl || !sessionSel) return;
+
+    if (dayEl) {
+      if (selectedDate) {
+        dayEl.textContent = selectedDate.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+        dayEl.classList.remove("pending");
+        dayEl.classList.add("set");
+      } else {
+        dayEl.textContent = "Not chosen";
+        dayEl.classList.add("pending");
+        dayEl.classList.remove("set");
+      }
+    }
+    if (timeEl) {
+      if (selectedSlot) {
+        timeEl.textContent = selectedSlot;
+        timeEl.classList.remove("pending");
+        timeEl.classList.add("set");
+      } else {
+        timeEl.textContent = "Not chosen";
+        timeEl.classList.add("pending");
+        timeEl.classList.remove("set");
+      }
+    }
+    sessEl.textContent = sessionSel.value;
+    if (priceEl) priceEl.textContent = SESSION_COSTS[sessionSel.value] || "";
+  }
+
+  if (sessionSel) {
+    sessionSel.addEventListener("change", () => {
+      updateSummary();
+      showToast(`Session: ${sessionSel.value} · ${SESSION_COSTS[sessionSel.value] || ""}`);
+    });
+  }
 
   SLOTS.forEach((s) => {
     const b = document.createElement("button");
@@ -270,6 +347,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".slot").forEach((x) => x.classList.remove("active"));
       b.classList.add("active");
       selectedSlot = s;
+      updateSummary();
+      showToast(`Time slot selected: ${s}`);
     });
     slotsBox.appendChild(b);
   });
@@ -305,6 +384,10 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.addEventListener("click", () => {
           selectedDate = date;
           render();
+          updateSummary();
+          showToast(
+            `Day selected: ${date.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "short" })}`
+          );
         });
       }
       cells.appendChild(cell);
@@ -356,7 +439,53 @@ document.addEventListener("DOMContentLoaded", () => {
       <a class="btn sms-btn" href="${smsUrl}">Send Booking SMS</a>`;
     box.classList.add("show");
     box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    showToast("Booking ready — send the SMS to confirm!");
   });
 
   render();
+  updateSummary();
+});
+
+/* ---------- FIFA tournament countdown ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const cd = document.getElementById("countdown");
+  if (!cd) return;
+
+  function pad(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  function nextTournament() {
+    const now = new Date();
+    const target = new Date(now);
+    /* Saturday = 6 */
+    let diff = (6 - now.getDay() + 7) % 7;
+    if (diff === 0) {
+      target.setHours(20, 0, 0, 0);
+      if (target <= now) diff = 7;
+    }
+    target.setDate(now.getDate() + diff);
+    target.setHours(20, 0, 0, 0);
+    return target;
+  }
+
+  function render() {
+    const remain = nextTournament() - Date.now();
+    if (remain <= 0) return;
+    const d = Math.floor(remain / 86400000);
+    const h = Math.floor((remain / 3600000) % 24);
+    const m = Math.floor((remain / 60000) % 60);
+    const s = Math.floor((remain / 1000) % 60);
+    const set = (id, v) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = pad(v);
+    };
+    set("cd-d", d);
+    set("cd-h", h);
+    set("cd-m", m);
+    set("cd-s", s);
+  }
+
+  render();
+  setInterval(render, 1000);
 });
