@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://one08arcade.onrender.com/sitemap.xml
