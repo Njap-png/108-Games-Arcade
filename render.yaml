@@ -1,9 +1,6 @@
 services:
-  - type: web
-    name: 108-games-arcade
-    runtime: node
-    plan: free
-    buildCommand: npm install
-    startCommand: serve -l 10000
-    healthCheckPath: /
+  - type: static
+    name: one08arcade
+    runtime: static
+    staticPublishPath: ./
     autoDeploy: true
